@@ -1,0 +1,109 @@
+.corpo-fundo
+{
+    width: 700px;
+    height: 370px ;
+    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row-reverse;
+}
+.corpo-form
+{
+    height: 100%;
+    width: 340px;
+    position: relative;
+    left: 0px;
+    right: 0;
+    top: 0px;
+    padding: 28px 0px 0px 29px;
+}
+
+.aba-direita2 {
+    width: 65%;
+    height: 100%;
+    background-image: linear-gradient(to bottom left, transparent 49.9%, rgb(255, 255, 255) 50%), url(/img/bg-inicio.jpg);
+    background-repeat: no-repeat;
+    background-position: right 0px, center;
+    background-size: cover;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.pai-form
+{
+    left: 0;
+    width: 35%;
+    height: 100%;
+}
+.btn
+{
+    padding: 1px 30px;
+    font-weight: 900;
+}
+.btn-login
+{
+	
+	background: #2ac4fb;
+
+    color: #fff;
+}
+.btn-login:hover
+{
+	background:#27acdc;
+	 color: #fff;
+}
+.card-1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  
+  .card-1:hover {
+    box-shadow:0 14px 28px rgba(0,0,0,0.30), 0 10px 10px rgba(0,0,0,0.1);
+  }
+  .alert.alert-dismissible
+  {
+    margin-bottom: 0px; 
+    padding: 7px;
+    color: #fff;
+    background-color: #ec3e31;
+    display: flex;
+    flex-direction: row;
+    line-height: 1em;
+    border-radius: 2px;
+  }
+@media (max-width: 575.98px)
+{
+    .corpo-fundo
+    {
+        width: 90%;
+        display: unset;
+        flex-direction: unset;
+    }
+    .aba-direita2
+    {
+        display: none;
+    }
+    .corpo-form
+    {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        position: unset;
+    }
+    .pai-form
+    {
+        width: 100%;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px)
+{
+	.principal
+	{
+		padding-left: 5%;
+		padding-right: 5%;
+		padding-top: 35%;
+		padding-bottom: 35%;    
+	}
+}
+@media (min-width: 768) and (max-width: 991.98px){}
+@media (min-width: 992) and (max-width: 199.98px){}
+@media (min-width: 1200){}

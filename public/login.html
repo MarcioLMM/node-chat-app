@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="/css/materialize/css/materialize.min.css" media="screen,projection">
+    <link rel="stylesheet" href="/css/style-login.css"">
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            overflow-x: auto;
+        }
+
+        .bgLogin {
+            background-image: url(/img/bgLogin1.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .box-login {
+            background-color: blue;
+            width: 700px;
+            height: 70%;
+            display: flex;
+        }
+
+        .div-form {
+            height: 100%;
+            width: 50%;
+            background-color: yellow;
+        }
+
+        .formulario {
+            background: tomato;
+        }
+
+        .font-welcome {
+            font-size: 45px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+<div class="bgLogin"></div>
+<div class="principal" style="display: flex;justify-content: space-around;height: 100%;align-items: center;">
+    <div class="corpo-fundo card-1">
+        <div class="aba-direita2">
+            <div style="padding-right: 20px;color: #fff;">
+                <h2 class="font-welcome">Welcome</h2>
+                <h2 class="font-welcome" style="margin-top:0px;float: right;">Back.</h2>
+            </div>
+        </div>
+        <div class="pai-form">
+            <div class="corpo-form">
+                <h2 style="    font-weight: bolder; font-size: 35px;margin-top: 0px;">Login</h2>
+                <span style="display: block;font-size: 12px;padding-bottom: 15px;padding-top: 0px;">
+                        Não possui uma conta?
+                        <a style="cursor: pointer;" class="modal-trigger" href="#modal1">Crie uma agora </a>
+                    </span>
+                <form action="#">
+                    <div class="input-field" style="margin-bottom: 25px;">
+                        <input id="ctEmail" type="email" class="validate" required>
+                        <label for="ctEmail">E-mail</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="password" type="password" class="validate" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div style="display: flex;flex-direction: row-reverse;margin-bottom: 15px;">
+                        <button class="btn btn-login" type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="alert alert-dismissible">
+                    <span style="width: 100%;">E-mail ou Senha invalidos.</span>
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size: 1.6em;color: #fff;">&times;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" style="width: 90%;max-width: 650px;    min-height: 200px;">
+    <div class="modal-header" style="padding: 10px 10px 0px 10px;text-align: center;">
+        <h4>Cadastro</h4>
+    </div>
+    <form action="#">
+        <div class="modal-content" style="padding-top: 0px;" >
+                <div class="input-field" style="margin-bottom: 25px;">
+                    <input id="ctNome" type="text" class="validate" required>
+                    <label for="ctNome">Nome</label>
+                </div>
+                <div class="input-field" style="margin-bottom: 25px;">
+                    <input id="ctEmail2" type="email" class="validate" required>
+                    <label for="ctEmail2">E-mail</label>
+                </div>
+                <div class="input-field">
+                    <input id="ctPassword" type="password" class="validate" required>
+                    <label for="ctPassword">Password</label>
+                </div>
+        </div>
+        <div class="modal-footer" style="padding-left: 24px;padding-right: 24px;">
+            <button class="btn btn-login" onclick="enviaForm()">Salvar</button>
+            <button class="modal-action modal-close btn grey darken-1" type="button" style="float:left;">fechar</button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<script src="/css/materialize/js/materialize.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#modal1').modal();
+        });et
+
+
+        function enviaForm() {
+            var nome = document.getElementById('ctNome').value;
+            var email = document.getElementById('ctEmail2').value;
+            var password = document.getElementById('ctPassword').value;
+            var data = JSON.stringify({"nome":nome, "email":email, "password":password});
+
+            $.ajax({
+              type: "POST",
+              url: "http://localhost:8080/cadastrar",
+              data: data,
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              complete: function(xhr, statusText){
+                if(xhr.status === 200) {
+                    sucesso();
+                } else {
+                    erro();
+                }
+              }
+            });
+        }
+
+        function sucesso() {
+           console.log("200");
+           // Colocar aqui a parte que feha a modal, pois o usuario foi salvo com suceso
+        }
+
+        function erro() {
+            console.log("400");
+            // Colocar aqui a parte exibir um erro pro usuario avisando que o email ja esta cadastrado
+        }
+    </script>
+</body>
+
+</html>
