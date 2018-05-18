@@ -2,12 +2,19 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
-const mysql = require('mysql');
 const session = require('express-session');
 var routes = require('./routes.js');
+var bodyParser = require('body-parser');
+var redis = require("redis");
+client = redis.createClient();
+var exphbs  = require('express-handlebars');
+
+client.flushall( function (err, succeeded) {
+  console.log(succeeded); 
+});
 
 
-const {generateMessage, generateLocationMessage} = require('./utils/message');
+const {generateMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 
@@ -15,107 +22,53 @@ const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
 app.use(express.static(publicPath));
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 6000 }}));
+app.use(bodyParser.json());
 var server = http.createServer(app);
 var io = socketIO(server);
-var users = new Users();
+
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, './../public/'));
 
 app.use(routes);
 
-app.get('/mensagens', (req, res) => {
-
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'chatuser',
-    password: 'chatpassword',
-    database: 'chat_teste'
-  });
-
-  var queryString = 'SELECT * FROM mensagem';
-  connection.query(queryString, (err, rows, fields) => {
-    res.json(rows);
-  });
-});
-
-app.get('/user/:id', (req, res) => {
-
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'chatuser',
-    password: 'chatpassword',
-    database: 'chat_teste'
-  });
-  var id = req.params.id;
-
-  var queryString = 'SELECT * FROM users WHERE id = ?'
-  connection.query(queryString, [id], (err, rows, fields) => {
-    if(err) {
-      console.log('Err:', err);
-      res.sendStatus(500);
-      res.end();
-      return;
-    }
-    res.json(rows);
-  });
-});
-
 io.on('connection', (socket) => {
   console.log('New user connected');
+  socket.emit();
 
-  socket.on('join', (params, callback) => {
-    if (!isRealString(params.name)) {
-      return callback('Name and room name are required.');
-    }
-
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'chatuser',
-      password: 'chatpassword',
-      database: 'chat_teste'
-    });
-
-    socket.join(params.room);
-    users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
-
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
-    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
-
-    var queryString = 'SELECT * FROM mensagem';
-    connection.query(queryString, (err, rows, fields) => {
-      res.json(rows);
-    });
-    callback();
+  socket.on('join', () => {
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User joined the chat'));
   });
 
   socket.on('createMessage', (message, callback) => {
-    var user = users.getUser(socket.id);
-
-    if (user && isRealString(message.text)) {
-      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
-    }
+    io.emit('newMessage', message);
     callback();
   });
 
-  socket.on('createLocationMessage', (coords) => {
-    var user = users.getUser(socket.id);
-
-    if(user) {
-      io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
-    }
-  });
-
   socket.on('disconnect', () => {
-    var user = users.removeUser(socket.id);
-
-    if (user) {
-      io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
-    }
+      io.emit('newMessage', generateMessage('Admin', 'Usuario has left'));
   });
 });
 
 server.listen(port, () => {
   console.log(`Server is up on ${port}`);
 });
+
+
+//// REDIS CONFIG ///
+client.on("error", function (err) {
+  console.log("Error " + err);
+});
+
+client.set("string key", "string val", redis.print);
+client.get("string key", function(err, reply) {
+  console.log(reply);
+});
+client.del('string key', function(err, response) {
+  if (response == 1) {
+     console.log("Deleted Successfully!")
+  } else{
+   console.log("Cannot delete")
+  }
+})
