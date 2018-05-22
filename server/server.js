@@ -10,9 +10,7 @@ client = redis.createClient();
 var exphbs  = require('express-handlebars');
 
 client.flushall( function (err, succeeded) {
-  console.log(succeeded); 
 });
-
 
 const {generateMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
@@ -24,6 +22,9 @@ var app = express();
 app.use(express.static(publicPath));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 6000 }}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 var server = http.createServer(app);
 var io = socketIO(server);
 
@@ -33,10 +34,17 @@ app.set('views', path.join(__dirname, './../public/'));
 
 app.use(routes);
 
+var users = [{id: 45, socketId: 12, nome: 'Marcio'}];
+client.set("users", JSON.stringify(users));
+
 io.on('connection', (socket) => {
   console.log('New user connected');
-  socket.emit();
-
+  var user = {id: socket.handshake.query.userId, socketId: socket.id, nome: socket.handshake.query.nome};
+  updateUserList(user).then((users) => {
+    console.log('server users:', users);
+    io.emit('userList', users);
+  })
+  
   socket.on('join', () => {
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User joined the chat'));
   });
@@ -47,7 +55,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-      io.emit('newMessage', generateMessage('Admin', 'Usuario has left'));
+    // console.log('socket:', socket);
+      removeUser(socket.id).then((users) => {
+        io.emit('newMessage', generateMessage('Admin', 'Usuario has left'));
+        io.emit('userList', users);
+      });
   });
 });
 
@@ -55,20 +67,41 @@ server.listen(port, () => {
   console.log(`Server is up on ${port}`);
 });
 
+function updateUserList(usuario) {
+  return new Promise((resolve, reject) => {
+    client.get('users', (err, reply) => {
+      let users = JSON.parse(reply);
+      users = users.filter(user => {return user.id != usuario.id}); 
+      users.push(usuario);
+      client.set('users', JSON.stringify(users));
+      console.log('update users:', users);
+      resolve(users);
+    });
+  });
+}
 
+function removeUser(id) {
+  return new Promise((resolve, reject) => {
+    client.get('users', (err, reply) => {
+      let users = JSON.parse(reply);
+      console.log('vou remover o:', id);
+      users = users.filter(user => {return user.socketId != id}); 
+      client.set('users', JSON.stringify(users));
+      console.log('remove users:', users);
+      resolve(users);
+    });
+  });
+}
+  
+  
+  // client.del(socket.handshake.query.userId, function(err, response) {
+    //   if (response == 1) {
+  //      console.log("Deleted Successfully!");
+  //   } else{
+  //    console.log("Cannot delete");
+  //   }
+  // });
 //// REDIS CONFIG ///
 client.on("error", function (err) {
   console.log("Error " + err);
 });
-
-client.set("string key", "string val", redis.print);
-client.get("string key", function(err, reply) {
-  console.log(reply);
-});
-client.del('string key', function(err, response) {
-  if (response == 1) {
-     console.log("Deleted Successfully!")
-  } else{
-   console.log("Cannot delete")
-  }
-})

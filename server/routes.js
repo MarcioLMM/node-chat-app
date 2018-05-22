@@ -36,7 +36,8 @@ router.get('/login', (req, res) => {
 router.get('/chat', (req, res) => {
     sess = req.session;
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        res.sendFile('chat.html', {root: path.join(__dirname, './../public')});
+        console.log('reqID:', req.session.userId);
+        res.render('chat', {id: req.session.userId, nome: req.session.username});
         return;
     }
     res.redirect('/login');
@@ -68,15 +69,14 @@ router.post('/login', (req, res) => {
         ).then(user => {
             if (user[0] === undefined) {
                 res.render('login', {msg: "Usuário inválido"});
-                // res.status(500).json({error: "Usuário inválido"});
                 return;
             }
             req.session.logado = true;
-            res.render('login', {msg: "Usuario cadastrado com sucesso"});
-            // res.status(201).json({msg: "Usuario cadastrado com sucesso"});
+            req.session.userId = user[0].id;
+            req.session.username = user[0].nome;
+            res.redirect('/chat');
         }).catch((error) => {
             res.render('login', {msg: "Dados inválidos"});
-            // res.status(500).send({ error: 'Dados inválidos' });
         });
     }
 });
