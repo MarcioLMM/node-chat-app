@@ -98,15 +98,13 @@
                         <label for="password">Password</label>
                     </div>
                     <div style="display: flex;flex-direction: row-reverse;margin-bottom: 15px;">
-                        <!-- <button class="btn btn-login" onclick="logar(event)">Login</button> -->
+                       <button class="btn btn-login" type="submit">Logar</button>
                     </div>
-                    {{!-- <div onclick="logar()">Logar</div> --}}
-                    <button class="btn btn-login" type="submit">Salvar</button>
                 </form>
 
-                <div class="alert alert-dismissible">
-                    <span style="width: 100%;" id="mensagem-login">{{#if msg}} {{msg}} {{/if}}</span>
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size: 1.6em;color: #fff;">&times;</a>
+                <div id="erroLogar" class="alert alert-dismissible" style="display: {{#if msg}} flex {{else}} none{{/if}};">
+                    <span style="width: 100%;" id="mensagem-login" {{#if msg}}  {{/if}}>{{msg}}</span>
+                    <a href="#" onclick="removerErroCadastro();" class="close" data-dismiss="alert" aria-label="close" style="font-size: 1.6em;color: #fff;">&times;</a>
                 </div>
             </div>
         </div>
@@ -134,8 +132,7 @@
             </div>
         </div>
         <div class="modal-footer" style="padding-left: 24px;padding-right: 24px;">
-            <div onclick="enviaForm()">Enviar</div>
-            <button class="btn btn-login" type="submit">Salvar</button>
+            <button onclick="enviaForm()" class="btn btn-login" type="button">Salvar</button>
             <button class="modal-action modal-close btn grey darken-1" type="button" style="float:left;">fechar</button>
         </div>
     </form>
