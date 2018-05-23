@@ -30,4 +30,9 @@ function erro(mensagem) {
 function removerErroCadastro()
 {
     $("#erroCadastro").remove();
+
+    if(  $("#erroLogar").is(':visible') == true)
+    {
+        $("#erroLogar").hide();
+    }
 }
