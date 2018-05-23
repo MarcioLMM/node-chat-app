@@ -1,801 +1,802 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Chat | ChatApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  
-  <link rel="stylesheet" href="/css/reset.css">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <link rel="stylesheet" href="/css/materialize/css/materialize.min.css">
-  <link rel="stylesheet" href="/css/chat.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" media="screen,projection">
+<head>
+    <meta charset="utf-8">
+    <title>Chat | ChatApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 
 
 <body class="container-body">
-<div class="container-conteudo" style="display: flex; flex-direction: column; height: 100%;">
+    <div class="container-conteudo" style="display: flex; flex-direction: column; height: 100%;">
 
 
-    <nav style="min-height: 70px;position: absolute;">
-        <ul id="slide-out" class="sidenav sidenav-fixed" style="overflow: hidden;">
-            <li>
+        <nav style="min-height: 70px;position: absolute;">
+            <ul id="slide-out" class="sidenav sidenav-fixed" style="overflow: hidden;">
+                <li>
 
 
-                <div class="user-view">
+                    <div class="user-view">
 
 
-                    <div class="background">
-                        <img src="img/office.jpg">
+                        <div class="background">
+                            <img src="img/office.jpg">
+                        </div>
+                        <img class="circle" src="img/me.jpg">
+                        <a href="#name">
+                            <span class="white-text name">John Doe</span>
+                        </a>
+                        <a href="#email">
+                            <span class="white-text email">jdandturk@gmail.com</span>
+                        </a>
                     </div>
-                    <img class="circle" src="img/me.jpg">
-                    <a href="#name">
-                        <span class="white-text name">John Doe</span>
+                </li>
+                <li style="display: flex;">
+
+                </li>
+                <li style="display: flex;    justify-content: center;">
+                    <a href="#" data-target="slide-out2" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
+                        <i class="fas fa-users" style="font-size: 2em" title="contatos"></i>
                     </a>
-                    <a href="#email">
-                        <span class="white-text email">jdandturk@gmail.com</span>
+                    <a href="#" data-target="slide-out3" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
+                        <i class="fas fa-cog" style="font-size: 2em" title="configurações"></i>
                     </a>
-                </div>
-            </li>
-            <li style="display: flex;">
+                    <ul id="slide-out2" class="sidenav" style="color: #000;">
+                        <li>
+                            <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
+                                <a style="background: unset;padding: 0px;margin-right: 10px;position: absolute;z-index: 1; left: 15px; top: 15px;" id="btn-voltar"
+                                    title="Voltar">
+                                    <i style="padding: 0px; margin: 0px;font-size: 2em;height: 30px;color: rgba(0,0,0,0.54);" class="fas fa-arrow-left"></i>
+                                </a>
+                                <h4 style="    font-size: 20px; left: 23px;text-align: center;">
+                                    contatos
+                                </h4>
+                            </div>
+                            <ul class="container-lista-conversas">
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            </li>
-            <li style="display: flex;    justify-content: center;">
-                <a href="#" data-target="slide-out2" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
-                    <i class="fas fa-users" style="font-size: 2em" title="contatos"></i>
-                </a>
-                <a href="#" data-target="slide-out3" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
-                    <i class="fas fa-cog" style="font-size: 2em" title="configurações"></i>
-                </a>
-                <ul id="slide-out2" class="sidenav" style="color: #000;">
-                    <li>
-                        <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
-                            <a style="background: unset;padding: 0px;margin-right: 10px;position: absolute;z-index: 1; left: 15px; top: 15px;" id="btn-voltar"
-                               title="Voltar">
-                                <i style="padding: 0px; margin: 0px;font-size: 2em;height: 30px;color: rgba(0,0,0,0.54);" class="fas fa-arrow-left"></i>
-                            </a>
-                            <h4 style="    font-size: 20px; left: 23px;text-align: center;">
-                                contatos
-                            </h4>
-                        </div>
-                        <ul class="container-lista-conversas">
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
                                                 <span class="black-text">
                                                     Thiago
                                                 </span>
+                                            </div>
                                         </div>
                                     </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card">
+                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                                <!-- notice the "circle" class -->
+                                            </div>
+                                            <div class="col s8">
+                                                <span class="black-text">
+                                                    Thiago
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul id="slide-out3" class="sidenav" style="color: #000;">
+                        <li style="width: 100%; height: 100%;">
+                            <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
+                                <a style="background: unset;padding: 0px;margin-right: 10px;position: absolute;z-index: 1; left: 15px; top: 15px;" id="btn-voltar2"
+                                    title="Voltar">
+                                    <i style="padding: 0px; margin: 0px;font-size: 2em;height: 30px;color: rgba(0,0,0,0.54);" class="fas fa-arrow-left"></i>
+                                </a>
+                                <h4 style="    font-size: 20px; left: 23px;text-align: center;">
+                                    configurações
+                                </h4>
+                                <form action="#" style="height: auto;">
+                                    <div id="imagem-configuracoes">
+                                        <img id="img-perfil" style="height: 98px;width: 100px;" class="circle" src="img/me.jpg">
+                                        <div class="div-hover">
+                                            <p>Alterar imagem</p>
+
+                                        </div>
+                                    </div>
+                                    <input id="fiAlterar-imagem" type="file" style="display: none;">
+                                </form>
+                                <div class="card">
+                                    <div class="row valign-wrapper" style="margin-bottom: 0px;">
+                                        <div class="col s10">
+                                            <span style="width: 100%;padding-left: 5px;">Nome do fulano</span>
+                                        </div>
+                                        <div class="col s3">
+                                            <a style="cursor: pointer;background: unset;padding-right: 10px;" class="modal-trigger" href="#modal1">
+                                                <i style="height: 25px;color: rgba(0,0,0,0.54);" class="fas fa-pencil-alt" title="Editar"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a th:href="@{/logout}">Logout</a>
                                 </div>
 
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                        <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                            <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                            <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul id="slide-out3" class="sidenav" style="color: #000;">
-                    <li style="width: 100%; height: 100%;">
-                        <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
-                            <a style="background: unset;padding: 0px;margin-right: 10px;position: absolute;z-index: 1; left: 15px; top: 15px;" id="btn-voltar2"
-                               title="Voltar">
-                                <i style="padding: 0px; margin: 0px;font-size: 2em;height: 30px;color: rgba(0,0,0,0.54);" class="fas fa-arrow-left"></i>
-                            </a>
-                            <h4 style="    font-size: 20px; left: 23px;text-align: center;">
-                                configurações
-                            </h4>
-                            <form action="#" style="height: auto;">
-                                <div id="imagem-configuracoes">
-                                    <img id="img-perfil" style="height: 98px;width: 100px;" class="circle" src="img/me.jpg">
-                                    <div class="div-hover">
-                                        <p>Alterar imagem</p>
+                            </div>
 
-                                    </div>
-                                </div>
-                                <input id="fiAlterar-imagem" type="file" style="display: none;">
-                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <ul class="container-lista-conversas">
+                        <li>
                             <div class="card">
-                                <div class="row valign-wrapper" style="margin-bottom: 0px;">
-                                    <div class="col s10">
-                                        <span style="width: 100%;padding-left: 5px;">Nome do fulano</span>
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
                                     </div>
-                                    <div class="col s3">
-                                        <a style="cursor: pointer;background: unset;padding-right: 10px;" class="modal-trigger" href="#modal1">
-                                            <i style="height: 25px;color: rgba(0,0,0,0.54);" class="fas fa-pencil-alt" title="Editar"></i>
-                                        </a>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
                                     </div>
                                 </div>
-                                <a th:href="@{/logout}">Logout</a>
                             </div>
 
-                        </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card">
+                                <div class="row valign-wrapper" style="margin-bottom: -10px;">
+                                    <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                                        <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                                        <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                        <span class="black-text">
+                                            Thiago
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                    </li>
-                </ul>
-            </li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
 
-            <li>
-                <ul class="container-lista-conversas">
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                    <!-- notice the "circle" class -->
-                                </div>
-                                <div class="col s8">
-                                        <span class="black-text">
-                                            Thiago
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-
-        </ul>
-        <a href="#" data-target="slide-out" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
-        </a>
-
-        <div class="row right info-perfil-right">
+            <div class="row right info-perfil-right">
                 <span style="margin: -6px;             margin-right: 10px;">
                     Thiago Luiz
                 </span>
-            <img style="    height: 50px; margin-right: 23px;" src="/img/me.jpg" alt="" class="circle responsive-img">
-            <!-- notice the "circle" class -->
-            <a href="/logout" class="logout" title="Logout">
-                <i class="fas fa-sign-out-alt" style="height: 30px;width:30px;"></i>
-            </a>
-        </div>
-    </nav>
+                <img style="    height: 50px; margin-right: 23px;" src="/img/me.jpg" alt="" class="circle responsive-img">
+                <!-- notice the "circle" class -->
+                <a href="/logout" class="logout" title="Logout">
+                    <i class="fas fa-sign-out-alt" style="height: 30px;width:30px;"></i>
+                </a>
+            </div>
+        </nav>
 
 
 
-    <main class="main" style="padding-top: 70px;">
-        <section style="background: #efebe9 ; height: 100%; width: 100%;display: flex; flex-direction: column;">
-            <main class="container-msg">
-                <div class="div-balao div-balao-left">
-                    <span class="quina-balao quina-left"></span>
-                    <div class="balao-msg balao-left">
+        <main class="main" style="padding-top: 70px;">
+            <section style="background: #efebe9 ; height: 100%; width: 100%;display: flex; flex-direction: column;">
+                <main class="container-msg">
+                    <div class="div-balao div-balao-left">
+                        <span class="quina-balao quina-left"></span>
+                        <div class="balao-msg balao-left">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para
@@ -805,26 +806,26 @@
                                 mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como
                                 Aldus PageMaker.
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="div-balao div-balao-right">
-                    <span class="quina-balao quina-right"></span>
-                    <div class="balao-msg balao-right">
+                    <div class="div-balao div-balao-right">
+                        <span class="quina-balao quina-right"></span>
+                        <div class="balao-msg balao-right">
                             <span>
                                 Lorem eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques
                                 contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares
                                 de editoração eletrônica como Aldus PageMaker.
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="div-balao div-balao-right">
-                    <span class="quina-balao quina-right"></span>
-                    <div class="balao-msg balao-right">
+                    <div class="div-balao div-balao-right">
+                        <span class="quina-balao quina-right"></span>
+                        <div class="balao-msg balao-right">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para
@@ -834,12 +835,12 @@
                                 mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como
                                 Aldus PageMaker.
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
-                <div class="div-balao div-balao-left">
-                    <span class="quina-balao quina-left"></span>
-                    <div class="balao-msg balao-left">
+                    <div class="div-balao div-balao-left">
+                        <span class="quina-balao quina-left"></span>
+                        <div class="balao-msg balao-left">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para
@@ -849,115 +850,115 @@
                                 mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como
                                 Aldus PageMaker.
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="div-balao div-balao-left">
-                    <span class="quina-balao quina-left"></span>
-                    <div class="balao-msg balao-left">
-                        <span>LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</span>
-                        <span class="balao-hora">10:20</span>
+                    <div class="div-balao div-balao-left">
+                        <span class="quina-balao quina-left"></span>
+                        <div class="balao-msg balao-left">
+                            <span>LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="div-balao div-balao-right">
-                    <span class="quina-balao quina-right"></span>
-                    <div class="balao-msg balao-right">
+                    <div class="div-balao div-balao-right">
+                        <span class="quina-balao quina-right"></span>
+                        <div class="balao-msg balao-right">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 século
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
-                <div class="div-balao div-balao-left">
-                    <span class="quina-balao quina-left"></span>
-                    <div class="balao-msg balao-left">
-                        <span>Lorem Ipsum é s </span>
-                        <span class="balao-hora">10:20</span>
+                    <div class="div-balao div-balao-left">
+                        <span class="quina-balao quina-left"></span>
+                        <div class="balao-msg balao-left">
+                            <span>Lorem Ipsum é s </span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="div-balao div-balao-right">
-                    <span class="quina-balao quina-right"></span>
-                    <div class="balao-msg balao-right">
+                    <div class="div-balao div-balao-right">
+                        <span class="quina-balao quina-right"></span>
+                        <div class="balao-msg balao-right">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 século XVI, qu
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
-                <div class="div-balao div-balao-left">
-                    <span class="quina-balao quina-left"></span>
-                    <div class="balao-msg balao-left">
-                        <span>Lorem </span>
-                        <span class="balao-hora">10:20</span>
+                    <div class="div-balao div-balao-left">
+                        <span class="quina-balao quina-left"></span>
+                        <div class="balao-msg balao-left">
+                            <span>Lorem </span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="div-balao div-balao-right">
-                    <span class="quina-balao quina-right"></span>
-                    <div class="balao-msg balao-right">
+                    <div class="div-balao div-balao-right">
+                        <span class="quina-balao quina-right"></span>
+                        <div class="balao-msg balao-right">
                             <span>
                                 Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
                                 sasadasd sad
                             </span>
-                        <span class="balao-hora">10:20</span>
+                            <span class="balao-hora">10:20</span>
+                        </div>
                     </div>
+                </main>
+                <footer class="grey lighten-2" style="width: 100%;">
+                    <div class="div-menssagem">
+                        <div class="container-Menssagem">
+                            <textarea id="ctMenssagem" class="textarea-menssagem" placeholder="Digite uma menssagem"></textarea>
+                        </div>
+                        <div class="container-btnEviar">
+                            <button id="btn-enviar" type="button" value="">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </footer>
+
+            </section>
+
+        </main>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal" style="width: 90%;max-width: 650px;    min-height: 200px;">
+        <div class="modal-header" style="padding: 10px 10px 0px 10px;text-align: center;">
+            <h4>Alterar nome</h4>
+        </div>
+        <div class="modal-content" style="padding-top: 0px;">
+            <form action="">
+                <div class="input-field" style="margin-bottom: 25px;">
+                    <input id="ctNome" type="text" class="validate" required>
+                    <label for="ctNome">Nome</label>
                 </div>
-            </main>
-            <footer class="grey lighten-2" style="width: 100%;">
-                <div class="div-menssagem">
-                    <div class="container-Menssagem">
-                        <textarea id="ctMenssagem" class="textarea-menssagem" placeholder="Digite uma menssagem"></textarea>
-                    </div>
-                    <div class="container-btnEviar">
-                        <button id="btn-enviar" type="button" value="">
-                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
 
-            </footer>
-
-        </section>
-
-    </main>
-</div>
-
-
-<!-- Modal Structure -->
-<div id="modal1" class="modal" style="width: 90%;max-width: 650px;    min-height: 200px;">
-    <div class="modal-header" style="padding: 10px 10px 0px 10px;text-align: center;">
-        <h4>Alterar nome</h4>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">salvar</a>
+        </div>
     </div>
-    <div class="modal-content" style="padding-top: 0px;">
-        <form action="">
-            <div class="input-field" style="margin-bottom: 25px;">
-                <input id="ctNome" type="text" class="validate" required>
-                <label for="ctNome">Nome</label>
-            </div>
+    <p id="userId" style="display: none">{{id}}</p>
+    <p id="user_name" style="display: none">{{nome}}</p>
 
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">salvar</a>
-    </div>
-</div>
-  <p id="userId" style="display: none">{{id}}</p>
-  <p id="user_name" style="display: none">{{nome}}</p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery-3.1.0.min.js"></script>
+    <script src="/css/materialize/js/materialize.min.js"></script>
+    <script src="/js/libs/moment.js"></script>
+    <script src="/js/libs/deparam.js"></script>
+    <script src="/js/chat.js"></script>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/libs/jquery-3.1.0.min.js"></script>
-  <script src="/css/materialize/js/materialize.min.js"></script>
-  <script src="/js/libs/moment.js"></script>
-  <script src="/js/libs/deparam.js"></script>
-  <script src="/js/chat.js"></script>
-
-  <script>
+    <script>
         $(document).ready(function () {
 
             $('#modal1').modal();
