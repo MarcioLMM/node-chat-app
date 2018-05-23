@@ -37,7 +37,7 @@ router.get('/chat', (req, res) => {
     sess = req.session;
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
         console.log('reqID:', req.session.userId);
-        res.render('chat', {id: req.session.userId, nome: req.session.username});
+        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail});
         return;
     }
     res.redirect('/login');
@@ -74,6 +74,7 @@ router.post('/login', (req, res) => {
             req.session.logado = true;
             req.session.userId = user[0].id;
             req.session.username = user[0].nome;
+            req.session.userEmail = email;
             res.redirect('/chat');
         }).catch((error) => {
             res.render('login', {msg: "Dados inválidos"});

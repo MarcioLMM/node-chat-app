@@ -9,20 +9,21 @@ html,body
 /***********************************************************************
 *
 ************************************************************************/
-.logout
+a.logout
 {
     margin-left: 0px;
     padding: 0px;
     background: unset;
     width: 38px;
     height: 40px;
-    position: absolute;
-    right: 15px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 10px;
+}
+a.logout:hover
+{
+    background: unset;
 }
 #imagem-configuracoes
 {
@@ -213,6 +214,10 @@ html,body
 {
     font-size: 28px;
 }
+button#btn-enviar:focus {
+    outline: none;
+    background: unset;
+}
 .container-lista-conversas
 {
     height: 67vh;
@@ -237,7 +242,6 @@ html,body
     padding-top: 10px;
     padding-bottom: 10px; 
     font-size: 20px;
-    padding-right: 50px;
 }
 /***********************************************************************
 *
