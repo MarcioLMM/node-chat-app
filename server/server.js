@@ -20,7 +20,7 @@ const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
 app.use(express.static(publicPath));
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 6000 }}));
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -34,7 +34,7 @@ app.set('views', path.join(__dirname, './../public/'));
 
 app.use(routes);
 
-var users = [{id: 45, socketId: 12, nome: 'Marcio'}];
+var users = [];
 client.set("users", JSON.stringify(users));
 
 io.on('connection', (socket) => {

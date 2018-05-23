@@ -30,7 +30,7 @@ socket.on('newMessage', function (message) {
   var template = jQuery('#message-template').html();
   var html = `<li class="message">
   <div class="message__title">
-  <h4>Nome do Usuario</h4>
+  <h4>${message.from} - ${message.id}</h4>
   </div>
   <div class="message__body">
   <p>${message.text}</p>
@@ -46,7 +46,9 @@ jQuery('#message-form').on('submit', function (e) {
   console.log('New Message: ', messageTextbox.val());
   
   socket.emit('createMessage', {
-    text: messageTextbox.val()
+    text: messageTextbox.val(),
+    id: userId,
+    from: username
   }, function () {
     messageTextbox.val('')
   });
