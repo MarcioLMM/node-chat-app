@@ -16,40 +16,58 @@ socket.on('disconnect', function () {
 
 socket.on('userList', function(users) {
   console.log('Chegou userList:', users);
-  var ol = jQuery('<ol></ol>');
-  
   users.forEach(function (user) {
-    ol.append(jQuery('<li></li>').text(user.nome));
+    $("#usuariosLogados").append(`<li>
+    <div class="card">
+        <div class="row valign-wrapper" style="margin-bottom: -10px;">
+            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
+                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
+                <!-- notice the "circle" class -->
+            </div>
+            <div class="col s8">
+                    <span class="black-text">
+                        ${user.nome}
+                    </span>
+            </div>
+        </div>
+    </div>
+  </li>`);
   });
-  
-  jQuery('#users').html(ol);
 });
 
 socket.on('newMessage', function (message) {
   console.log('Chegou mensagem:', message);
-  var template = jQuery('#message-template').html();
-  var html = `<li class="message">
-  <div class="message__title">
-  <h4>${message.from} - ${message.id}</h4>
-  </div>
-  <div class="message__body">
-  <p>${message.text}</p>
-  </div>
-  </li>`
-  jQuery('#messages').append(html);
+  var lado = userId === message.id ? 'right': 'left';
+  var now = new Date();
+  console.log("lado:", lado, "now:", now);
+
+  var html = `
+  <div class="div-balao div-balao-${lado}">
+    <span class="quina-balao quina-${lado}"></span>
+    <div class="balao-msg balao-${lado}">
+      <p><b>${message.from}</b></p>
+      <span>
+          ${message.text}
+      </span>
+      <span class="balao-hora">${now}</span>
+    </div>
+  </div>`
+
+  $(".container-msg").append(html);
+  $(".container-msg").animate({ scrollTop: $('.container-msg').prop("scrollHeight") }, 500);
+  $('#ctMenssagem').val('');
+  $('#ctMenssagem').focus();
+  $('#ctMenssagem').css('height', '22px');
 });
 
-jQuery('#message-form').on('submit', function (e) {
-  e.preventDefault();
-  
-  var messageTextbox = jQuery('[name=message]');
-  console.log('New Message: ', messageTextbox.val());
-  
-  socket.emit('createMessage', {
-    text: messageTextbox.val(),
-    id: userId,
-    from: username
-  }, function () {
-    messageTextbox.val('')
-  });
+$("#btn-enviar").click(function () {
+  if ($('#ctMenssagem').val().trim().length > 0) {
+    socket.emit('createMessage', {
+      text: $('#ctMenssagem').val(),
+      id: userId,
+      from: username
+    }, function () {
+      console.log("Ola");
+    });
+  }
 });
