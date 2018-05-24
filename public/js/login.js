@@ -19,6 +19,11 @@ function enviaForm() {
 
 function sucesso(mensagem) {
    $('#modal1').modal("close");
+   $(".box-sucess").fadeIn(700, function () {
+        window.setTimeout(function () {
+            $(".box-sucess").fadeOut("slow");
+        }, 5000);
+    });
 }
 
 function erro(mensagem) {

@@ -69,6 +69,18 @@
     line-height: 1em;
     border-radius: 2px;
   }
+  .box-sucess {
+    color: #FFF;
+    background: #2ac4fb;
+    border: 1px solid #27acdc;;
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    right: 0px;
+    top: 15px;
+
+    display: none;
+}
 @media (max-width: 575.98px)
 {
     .corpo-fundo
