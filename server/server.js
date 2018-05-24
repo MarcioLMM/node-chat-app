@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     // console.log('socket:', socket);
       removeUser(socket.id).then((users) => {
-        io.emit('newMessage', generateMessage('Admin', 'Usuario has left'));
+        io.emit('newMessage', generateMessage('Admin', 'Usuario deslogou'));
         io.emit('userList', users);
       });
   });

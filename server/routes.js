@@ -82,6 +82,14 @@ router.post('/login', (req, res) => {
     }
 });
 
+router.get('/logout', (req, res) => {
+    req.session.logado = false;
+    req.session.userId = null;
+    req.session.username = null;
+    req.session.userEmail = null;
+    res.redirect('/login');
+});
+
 function usuarioValido(nome, password, email) {
     if(nome === '' || password === '' || email === '') {
         return false;
