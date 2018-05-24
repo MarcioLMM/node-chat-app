@@ -38,8 +38,8 @@ var users = [];
 client.set("users", JSON.stringify(users));
 
 io.on('connection', (socket) => {
-  console.log('New user connected');
   var user = {id: socket.handshake.query.userId, socketId: socket.id, nome: socket.handshake.query.nome};
+
   updateUserList(user).then((users) => {
     console.log('server users:', users);
     io.emit('userList', users);
@@ -50,12 +50,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('createMessage', (message, callback) => {
-    io.emit('newMessage', message);
+    getIdToSocketId(message.idTo).then((socketId) => {
+      io.emit(socketId).emit('newMessage', message);
+    });
     callback();
   });
 
   socket.on('disconnect', () => {
-    // console.log('socket:', socket);
       removeUser(socket.id).then((users) => {
         io.emit('newMessage', generateMessage('Admin', 'Usuario deslogou'));
         io.emit('userList', users);
@@ -76,6 +77,18 @@ function updateUserList(usuario) {
       client.set('users', JSON.stringify(users));
       console.log('update users:', users);
       resolve(users);
+    });
+  });
+}
+
+function getIdToSocketId(idTo) {
+  return new Promise((resolve, reject) => {
+    client.get('users', (err, reply) => {
+      let users = JSON.parse(reply);
+      console.log('vou pegar o:', idTo);
+      user = users.filter(user => {return user.id === idTo}); 
+      console.log('achei:', user);
+      resolve(user.socketId);
     });
   });
 }

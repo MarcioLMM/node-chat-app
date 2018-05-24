@@ -35,9 +35,21 @@ router.get('/login', (req, res) => {
 
 router.get('/chat', (req, res) => {
     sess = req.session;
+    console.log('sess', sess);
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        console.log('reqID:', req.session.userId);
-        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail});
+        // res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail});
+        res.redirect(`/chat/${req.session.userId}`);
+        return;
+    }
+    res.redirect('/login');
+});
+
+router.get('/chat/:id', (req, res) => {
+    sess = req.session;
+    var idTo = req.params.id;
+    console.log("Id:", idTo);
+    if(typeof sess.logado !== 'undefined' && sess.logado === true) {
+        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
         return;
     }
     res.redirect('/login');
@@ -63,7 +75,7 @@ router.post('/cadastrar', (req, res) => {
 router.post('/login', (req, res) => {
     var password = req.body.password;
     var email = req.body.email;
-
+    console.log("Password:", password, "Email", email);
     if(usuarioValido('teste', password, email)) {
         Usuario.findAll({where: {password: password, email: email}}
         ).then(user => {
@@ -75,6 +87,7 @@ router.post('/login', (req, res) => {
             req.session.userId = user[0].id;
             req.session.username = user[0].nome;
             req.session.userEmail = email;
+            console.log(req.session);
             res.redirect('/chat');
         }).catch((error) => {
             res.render('login', {msg: "Dados inválidos"});

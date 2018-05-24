@@ -1,6 +1,8 @@
 var userId = document.getElementById('userId').innerHTML;
 var username = document.getElementById('user_name').innerHTML;
+var idTo = document.getElementById('idTo').innerHTML;
 
+console.log("Vou logar no io:", userId, username);
 var socket = io({query: {
   userId: userId,
   nome: username
@@ -26,9 +28,9 @@ socket.on('userList', function(users) {
                 <!-- notice the "circle" class -->
             </div>
             <div class="col s8">
-                    <span class="black-text">
-                        ${user.nome}
-                    </span>
+            <a href="/chat/${user.id}">
+              <span class="black-text">${user.nome}</span>
+            </a>
             </div>
         </div>
     </div>
@@ -38,27 +40,33 @@ socket.on('userList', function(users) {
 
 socket.on('newMessage', function (message) {
   console.log('Chegou mensagem:', message);
-  var lado = userId === message.id ? 'right': 'left';
-  var now = new Date();
-  console.log("lado:", lado, "now:", now);
+  var mostra = message.id === idTo ? true : false;
+  if (mostra || (message.id === userId && message.idTo === idTo)) {
+    var lado = userId === message.id ? 'right': 'left';
+    var now = new Date();
+    console.log("lado:", lado, "now:", now);
 
-  var html = `
-  <div class="div-balao div-balao-${lado}">
-    <span class="quina-balao quina-${lado}"></span>
-    <div class="balao-msg balao-${lado}">
-      <p><b>${message.from}</b></p>
-      <span>
-          ${message.text}
-      </span>
-      <span class="balao-hora">${now}</span>
-    </div>
-  </div>`
+    var html = `
+    <div class="div-balao div-balao-${lado}">
+      <span class="quina-balao quina-${lado}"></span>
+      <div class="balao-msg balao-${lado}">
+        <p><b>${message.from}</b></p>
+        <span>
+            ${message.text}
+        </span>
+        <span class="balao-hora">${now}</span>
+      </div>
+    </div>`
 
-  $(".container-msg").append(html);
-  $(".container-msg").animate({ scrollTop: $('.container-msg').prop("scrollHeight") }, 500);
-  $('#ctMenssagem').val('');
-  $('#ctMenssagem').focus();
-  $('#ctMenssagem').css('height', '22px');
+    $(".container-msg").append(html);
+    $(".container-msg").animate({ scrollTop: $('.container-msg').prop("scrollHeight") }, 500);
+    $('#ctMenssagem').val('');
+    $('#ctMenssagem').focus();
+    $('#ctMenssagem').css('height', '22px');
+  } else {
+    console.log("Não vou mostrar");
+  }
+  
 });
 
 $("#btn-enviar").click(function () {
@@ -66,9 +74,9 @@ $("#btn-enviar").click(function () {
     socket.emit('createMessage', {
       text: $('#ctMenssagem').val(),
       id: userId,
-      from: username
+      from: username,
+      idTo: idTo
     }, function () {
-      console.log("Ola");
     });
   }
 });
