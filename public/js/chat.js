@@ -16,8 +16,9 @@ socket.on('disconnect', function () {
 
 socket.on('userList', function(users) {
   console.log('Chegou userList:', users);
+  $(".lista-usuarios").remove();
   users.forEach(function (user) {
-    $("#usuariosLogados").append(`<li>
+    $("#usuariosLogados").append(`<li class="lista-usuarios">
     <div class="card">
         <div class="row valign-wrapper" style="margin-bottom: -10px;">
             <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
