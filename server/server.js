@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
         getIdToSocketId(mensagem.idTo).then((socketId) => {
           console.log('To dentro do forEach');
           console.log(mensagem.dataValues);
-          io.emit(socketId).emit('newMessage', mensagem.dataValues);
+          socket.emit(socketId).emit('newMessage', mensagem.dataValues);
         });
       });
       

@@ -46,10 +46,7 @@ socket.on('userList', function (users) {
 
 socket.on('newMessage', function (message) {
   console.log('Chegou mensagem:', message);
-  console.log('idSender:', message.idSender, 'idTo:', message.idTo);
-  console.log('userId:', userId, 'idTo:', idTo)
   var mostra = message.idSender == idTo ? true : false;
-  console.log(mostra, message.idSender == userId, message.idTo == idTo);
   if (mostra || (message.idSender == userId && message.idTo == idTo)) {
     var lado = userId == message.idSender ? 'right' : 'left';
     var now = new Date();
