@@ -35,10 +35,9 @@ router.get('/login', (req, res) => {
 
 router.get('/chat', (req, res) => {
     sess = req.session;
-    console.log('sess', sess);
+    var idTo = req.session.idTo
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        // res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail});
-        res.redirect(`/chat/${req.session.userId}`);
+        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
         return;
     }
     res.redirect('/login');
@@ -46,10 +45,9 @@ router.get('/chat', (req, res) => {
 
 router.get('/chat/:id', (req, res) => {
     sess = req.session;
-    var idTo = req.params.id;
-    console.log("Id:", idTo);
+    req.session.idTo = req.params.id;
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
+        res.redirect('/chat');
         return;
     }
     res.redirect('/login');
