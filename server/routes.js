@@ -4,6 +4,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const session = require('express-session');
 const sequelize = new Sequelize('mysql://chatuser:chatpassword@localhost/chat_teste');
+const Op = Sequelize.Op;
 
 sequelize
     .authenticate()
@@ -22,7 +23,18 @@ const Usuario = sequelize.define('users', {
 },
 {
     timestamps: false,
-})
+});
+
+const Mensagem = sequelize.define('mensagem', {
+    id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+    conteudo: { type: Sequelize.STRING, allowNull: false },
+    idSender: { type: Sequelize.INTEGER, allowNull: false },
+    idTo: { type: Sequelize.INTEGER, allowNull: false },
+    nome: { type: Sequelize.STRING, allowNull: false },
+},
+{
+    timestamps: false,
+});
 
 router.get('/login', (req, res) => {
     sess = req.session;
@@ -37,7 +49,34 @@ router.get('/chat', (req, res) => {
     sess = req.session;
     var idTo = req.session.idTo
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
+        if(idTo !== undefined) {
+            var id = req.session.userId;
+            Mensagem.findAll({where: {idSender: {[Op.or]: [id, idTo]}, idTo: {[Op.or]: [id, idTo]}}}
+            ).then(mensagens => {
+                var htmlFinal = [];
+                // mensagens.forEach(mensagem => {
+                //     var lado = id === mensagem.idSender ? 'right' : 'left';
+                //     var html = `
+                //     <div class="div-balao div-balao-${lado}">
+                //     <span class="quina-balao quina-${lado}"></span>
+                //     <div class="balao-msg balao-${lado}">
+                //         <p><b>${mensagem.id}</b></p>
+                //         <span>
+                //             ${mensagem.conteudo}
+                //         </span>
+                //         <span class="balao-hora">Data Qualquer</span>
+                //     </div>
+                //     </div>
+                //     </br>`
+                //     htmlFinal.push(html);
+                // });
+                res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, mensagens: htmlFinal});
+            }).catch((error) => {
+                console.log('Deu ruim:', error);
+            });
+        } else {
+            res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
+        }
         return;
     }
     res.redirect('/login');
@@ -100,16 +139,15 @@ router.get('/logout', (req, res) => {
     req.session.userEmail = null;
     res.redirect('/login');
 });
+
 router.post('/alterarNome', (req, res) => {
     var nome = req.body.nome;
-   
-    
-        Usuario.update({nome: nome}
-        ).then(() => {
-            res.status(201).json({msg: "Usuario alterado com sucesso"});
-        }).catch(() => {
-            res.status(500).send({ error: 'nao alterado' });
-        });
+    Usuario.update({nome: nome}
+    ).then(() => {
+        res.status(201).json({msg: "Usuario alterado com sucesso"});
+    }).catch(() => {
+        res.status(500).send({ error: 'nao alterado' });
+    });
 });
 
 function usuarioValido(nome, password, email) {
@@ -119,13 +157,32 @@ function usuarioValido(nome, password, email) {
     return true;
 }
 
-function abreConexaoMysql() {
-    return connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'chatuser',
-        password: 'chatpassword',
-        database: 'chat_teste'
-    });
+function salvaMensagem(mensagem) {
+    console.log(mensagem);
+    if(mensagem.idTo != "") {
+        Mensagem.create({conteudo: mensagem.conteudo, idSender: mensagem.idSender, idTo: mensagem.idTo, nome: mensagem.nome}
+        ).then(() => {
+            console.log('Sucesso');
+        }).catch((err) => {
+            console.log('Deu merda:', err);
+        });
+    }
+    console.log('Não entrei');
 }
 
-module.exports = router;
+function pegaMensagens(id, idTo) {
+    return new Promise((resolve, reject) => {
+        console.log('idTo la dentro:', idTo, idTo !== undefined);
+        if(idTo !== undefined) {
+            Mensagem.findAll({where: {idSender: {[Op.or]: [id, idTo]}, idTo: {[Op.or]: [id, idTo]}}}
+            ).then(mensagens => {
+                console.log('Vou retornar as mensagens');
+                mensagens.forEach(mensagem => console.log(mensagem.dataValues));
+                resolve(mensagens);
+            });
+        }
+        console.log('Estou aqui fora');
+      });
+}
+
+module.exports = {router, salvaMensagem, pegaMensagens};

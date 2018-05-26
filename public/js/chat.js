@@ -6,7 +6,8 @@ console.log("Vou logar no io:", userId, username);
 var socket = io({
   query: {
     userId: userId,
-    nome: username
+    nome: username,
+    idTo: idTo
   }
 });
 
@@ -45,9 +46,12 @@ socket.on('userList', function (users) {
 
 socket.on('newMessage', function (message) {
   console.log('Chegou mensagem:', message);
-  var mostra = message.id === idTo ? true : false;
-  if (mostra || (message.id === userId && message.idTo === idTo)) {
-    var lado = userId === message.id ? 'right' : 'left';
+  console.log('idSender:', message.idSender, 'idTo:', message.idTo);
+  console.log('userId:', userId, 'idTo:', idTo)
+  var mostra = message.idSender == idTo ? true : false;
+  console.log(mostra, message.idSender == userId, message.idTo == idTo);
+  if (mostra || (message.idSender == userId && message.idTo == idTo)) {
+    var lado = userId == message.idSender ? 'right' : 'left';
     var now = new Date();
     console.log("lado:", lado, "now:", now);
 
@@ -55,9 +59,9 @@ socket.on('newMessage', function (message) {
     <div class="div-balao div-balao-${lado}">
       <span class="quina-balao quina-${lado}"></span>
       <div class="balao-msg balao-${lado}">
-        <p><b>${message.from}</b></p>
+        <p><b>${message.nome}</b></p>
         <span>
-            ${message.text}
+            ${message.conteudo}
         </span>
         <span class="balao-hora">${now}</span>
       </div>
@@ -77,9 +81,9 @@ socket.on('newMessage', function (message) {
 $("#btn-enviar").click(function () {
   if ($('#ctMenssagem').val().trim().length > 0) {
     socket.emit('createMessage', {
-      text: $('#ctMenssagem').val(),
-      id: userId,
-      from: username,
+      conteudo: $('#ctMenssagem').val(),
+      idSender: userId,
+      nome: username,
       idTo: idTo
     }, function () {
     });

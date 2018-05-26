@@ -32,16 +32,31 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, './../public/'));
 
-app.use(routes);
+app.use(routes.router);
 
 var users = [];
 client.set("users", JSON.stringify(users));
 
 io.on('connection', (socket) => {
   var user = {id: socket.handshake.query.userId, socketId: socket.id, nome: socket.handshake.query.nome};
+  if (socket.handshake.query.idTo !== undefined) {
+    console.log('idTo da bagassa:', socket.handshake.query.idTo);
+    console.log('vou emitir as mensagens');
+    routes.pegaMensagens(socket.handshake.query.userId, socket.handshake.query.idTo).then((mensagens) => {
+      console.log('To antes do forEach', mensagens);
+      mensagens.forEach(mensagem => {
+        getIdToSocketId(mensagem.idTo).then((socketId) => {
+          console.log('To dentro do forEach');
+          console.log(mensagem.dataValues);
+          io.emit(socketId).emit('newMessage', mensagem.dataValues);
+        });
+      });
+      
+    });
+  }
 
   updateUserList(user).then((users) => {
-    console.log('server users:', users);
+    // console.log('server users:', users);
     io.emit('userList', users);
   })
   
@@ -51,6 +66,7 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', (message, callback) => {
     getIdToSocketId(message.idTo).then((socketId) => {
+      routes.salvaMensagem(message);
       io.emit(socketId).emit('newMessage', message);
     });
     callback();
@@ -75,7 +91,7 @@ function updateUserList(usuario) {
       users = users.filter(user => {return user.id != usuario.id}); 
       users.push(usuario);
       client.set('users', JSON.stringify(users));
-      console.log('update users:', users);
+      // console.log('update users:', users);
       resolve(users);
     });
   });
@@ -85,9 +101,7 @@ function getIdToSocketId(idTo) {
   return new Promise((resolve, reject) => {
     client.get('users', (err, reply) => {
       let users = JSON.parse(reply);
-      console.log('vou pegar o:', idTo);
       user = users.filter(user => {return user.id === idTo}); 
-      console.log('achei:', user);
       resolve(user.socketId);
     });
   });
@@ -97,10 +111,10 @@ function removeUser(id) {
   return new Promise((resolve, reject) => {
     client.get('users', (err, reply) => {
       let users = JSON.parse(reply);
-      console.log('vou remover o:', id);
+      // console.log('vou remover o:', id);
       users = users.filter(user => {return user.socketId != id}); 
       client.set('users', JSON.stringify(users));
-      console.log('remove users:', users);
+      // console.log('remove users:', users);
       resolve(users);
     });
   });
