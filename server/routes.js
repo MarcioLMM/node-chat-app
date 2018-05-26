@@ -101,10 +101,12 @@ router.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 router.post('/alterarNome', (req, res) => {
-    var nome = req.body.nome;
+    var nomeRecebido = req.body.nome;
+
+    console.log(nomeRecebido);
+    console.log("cheguei");
    
-    
-        Usuario.update({nome: nome}
+        Usuario.update({nome: nomeRecebido},{where: { email: req.session.userEmail }}
         ).then(() => {
             res.status(201).json({msg: "Usuario alterado com sucesso"});
         }).catch(() => {

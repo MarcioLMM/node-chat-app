@@ -90,12 +90,33 @@ function enviaFormAlterarNome() {
   var nome = document.getElementById('ctNome').value;
   console.log(nome);
 
-  axios.post('/alterarNome', { nome: nome}
-  ).then(function (response) {
-    if (response.status === 201) {
-      sucesso(response.data.msg);
+  if(nome !== ''){
+
+    axios.post('/alterarNome', { nome: nome}
+    ).then(function (response) {
+      if (response.status === 201) {
+        console.log(response.data.msg);
+        $(".nomeUsuarioLogado").text(nome);
+        $('#modalAlterarNome').modal("close");
+        removerErroAlterarNome();
+        $('#ctNome').val('');
+      }
+    }).catch(function (error) {
+    
+        console.log(error);
+      
+    });
+  }
+  else
+  {
+    if($("#erroAlterarNome").is(':visible') == false)
+    {
+          $('#ctNome').focus();
+          $("#corpoModalAlterarNome").append(` <div id='erroAlterarNome' class='alert alert-dismissible'>  <span style='width: 100%;'>Preencha o campo corretamente!</span> <a href='#' onclick='removerErroAlterarNome();' class='close' data-dismiss='alert' aria-label='close' style='font-size: 1.6em;color: #fff;'>&times;</a> </div>  `);
     }
-  }).catch(function (error) {
-    erro(error.response.data.error);
-  });
+  }
+}
+function removerErroAlterarNome()
+{
+    $("#erroAlterarNome").remove();
 }
