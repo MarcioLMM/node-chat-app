@@ -243,6 +243,17 @@ button#btn-enviar:focus {
     padding-bottom: 10px; 
     font-size: 20px;
 }
+.alert.alert-dismissible
+  {
+    margin-bottom: 0px; 
+    padding: 7px;
+    color: #fff;
+    background-color: #ec3e31;
+    display: flex;
+    flex-direction: row;
+    line-height: 1em;
+    border-radius: 2px;
+  }
 /***********************************************************************
 *
 ************************************************************************/
