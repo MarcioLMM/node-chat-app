@@ -3,10 +3,12 @@ var username = document.getElementById('user_name').innerHTML;
 var idTo = document.getElementById('idTo').innerHTML;
 
 console.log("Vou logar no io:", userId, username);
-var socket = io({query: {
-  userId: userId,
-  nome: username
-}});
+var socket = io({
+  query: {
+    userId: userId,
+    nome: username
+  }
+});
 
 socket.on('connect', function () {
 
@@ -16,7 +18,7 @@ socket.on('disconnect', function () {
   console.log('Disconnected from server');
 });
 
-socket.on('userList', function(users) {
+socket.on('userList', function (users) {
   console.log('Chegou userList:', users);
   $(".lista-usuarios").remove();
   users.forEach(function (user) {
@@ -42,7 +44,7 @@ socket.on('newMessage', function (message) {
   console.log('Chegou mensagem:', message);
   var mostra = message.id === idTo ? true : false;
   if (mostra || (message.id === userId && message.idTo === idTo)) {
-    var lado = userId === message.id ? 'right': 'left';
+    var lado = userId === message.id ? 'right' : 'left';
     var now = new Date();
     console.log("lado:", lado, "now:", now);
 
@@ -66,7 +68,7 @@ socket.on('newMessage', function (message) {
   } else {
     console.log("Não vou mostrar");
   }
-  
+
 });
 
 $("#btn-enviar").click(function () {
@@ -80,3 +82,17 @@ $("#btn-enviar").click(function () {
     });
   }
 });
+
+function enviaFormAlterarNome() {
+  var nome = document.getElementById('ctNome').value;
+  console.log(nome);
+
+  axios.post('/alterarNome', { nome: nome}
+  ).then(function (response) {
+    if (response.status === 201) {
+      sucesso(response.data.msg);
+    }
+  }).catch(function (error) {
+    erro(error.response.data.error);
+  });
+}

@@ -102,6 +102,17 @@ router.get('/logout', (req, res) => {
     req.session.userEmail = null;
     res.redirect('/login');
 });
+router.post('/alterarNome', (req, res) => {
+    var nome = req.body.nome;
+   
+    
+        Usuario.update({nome: nome}
+        ).then(() => {
+            res.status(201).json({msg: "Usuario alterado com sucesso"});
+        }).catch(() => {
+            res.status(500).send({ error: 'nao alterado' });
+        });
+});
 
 function usuarioValido(nome, password, email) {
     if(nome === '' || password === '' || email === '') {
