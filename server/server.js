@@ -40,14 +40,9 @@ client.set("users", JSON.stringify(users));
 io.on('connection', (socket) => {
   var user = {id: socket.handshake.query.userId, socketId: socket.id, nome: socket.handshake.query.nome};
   if (socket.handshake.query.idTo !== undefined) {
-    console.log('idTo da bagassa:', socket.handshake.query.idTo);
-    console.log('vou emitir as mensagens');
     routes.pegaMensagens(socket.handshake.query.userId, socket.handshake.query.idTo).then((mensagens) => {
-      console.log('To antes do forEach', mensagens);
       mensagens.forEach(mensagem => {
         getIdToSocketId(mensagem.idTo).then((socketId) => {
-          console.log('To dentro do forEach');
-          console.log(mensagem.dataValues);
           socket.emit(socketId).emit('newMessage', mensagem.dataValues);
         });
       });
@@ -56,7 +51,6 @@ io.on('connection', (socket) => {
   }
 
   updateUserList(user).then((users) => {
-    // console.log('server users:', users);
     io.emit('userList', users);
   })
   
@@ -91,7 +85,6 @@ function updateUserList(usuario) {
       users = users.filter(user => {return user.id != usuario.id}); 
       users.push(usuario);
       client.set('users', JSON.stringify(users));
-      // console.log('update users:', users);
       resolve(users);
     });
   });
