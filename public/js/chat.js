@@ -29,7 +29,7 @@ socket.on('userList', function (users) {
           "<div class='card'>"+
               "<div class='row valign-wrapper' style='margin-bottom: -10px;'>"+
                   "<div class='col s4' style='display: flex;padding-top: 10px;padding-bottom: 10px;'>"+
-                      "<img style='height: 50px;' src='img/me.jpg' class='circle responsive-img'>"+
+                      "<div class='nameLista'> "+ user.nome+"</div>"+
                   "</div>"+
                   "<div class='col s8'>"+
                     "<a onclick='selectUser(this);' href='/chat/"+user.id+"'>"+
@@ -40,6 +40,14 @@ socket.on('userList', function (users) {
           "</div>"+
         "</li>");
     }
+    $('.nameLista').nameBadge(
+      {
+          border: { width: 0 },
+          text: '#fff',
+          margin: 0,
+          size: 50,
+          uppercase: true
+      });
   });
 });
 
@@ -99,9 +107,20 @@ function enviaFormAlterarNome() {
       if (response.status === 201) {
         console.log(response.data.msg);
         $(".nomeUsuarioLogado").text(nome);
+        $(".namePrincipal").text(nome);
         $('#modalAlterarNome').modal("close");
         removerErroAlterarNome();
         $('#ctNome').val('');
+        $('.namePrincipal').nameBadge(
+          {
+              border: { width: 0 },
+              colors: ['#1abc9c'],
+              text: '#fff',
+              margin: 0,
+              size: 64,
+              uppercase: true
+          });
+
       }
     }).catch(function (error) {
     

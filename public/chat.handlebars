@@ -26,7 +26,7 @@
                         <div class="background">
                             <img src="img/office.jpg" />
                         </div>
-                        <div class="name">{{nome}}</div>
+                        <div class="namePrincipal">{{nome}}</div>
                         <div>
                             <span class="nomeUsuarioLogado white-text">{{nome}}</span>
                         </div>
@@ -90,16 +90,12 @@
                                 <h4 style="    font-size: 20px; left: 23px;text-align: center;">
                                     configurações
                                 </h4>
-                                <form action="#" style="height: auto;">
-                                    <div id="imagem-configuracoes">
-                                        <img id="img-perfil" style="height: 98px;width: 100px;" class="circle" src="img/me.jpg">
-                                        <div class="div-hover">
-                                            <p>Alterar imagem</p>
 
-                                        </div>
-                                    </div>
-                                    <input id="fiAlterar-imagem" type="file" style="display: none;">
-                                </form>
+                                <div id="imagem-configuracoes">
+                                    <div class="namePrincipal">{{nome}}</div>
+                                </div>
+                                <input id="fiAlterar-imagem" type="file" style="display: none;">
+
                                 <div class="card">
                                     <div class="row valign-wrapper" style="margin-bottom: 0px;">
                                         <div class="col s10">
@@ -124,15 +120,13 @@
                 <i class="material-icons">menu</i>
             </a>
             <div class="row right info-perfil-right">
-                
+
             </div>
         </nav>
         <main class="main" style="padding-top: 70px;" id="mensagens">
             <section style="background: #efebe9 ; height: 100%; width: 100%;display: flex; flex-direction: column;">
                 <main class="container-msg"> </main>
-                    {{#each mensagens}}
-                        {{{this}}}
-                    {{/each}}
+                {{#each mensagens}} {{{this}}} {{/each}}
                 <footer class="grey lighten-2" style="width: 100%;">
                     <div class="div-menssagem">
                         <div class="container-Menssagem">
@@ -186,14 +180,17 @@
     <script>
         $(document).ready(function () {
 
-         $('.name').nameBadge(
-        {
-            border: { width: 0 },
-            text: '#fff',
-            margin: 0,
-            size: 64
-        });
-        
+            $('.namePrincipal').nameBadge(
+                {
+                    border: { width: 0 },
+                    colors: ['#1abc9c'],
+                    text: '#fff',
+                    margin: 0,
+                    size: 64,
+                    uppercase: true
+                });
+                 
+
 
 
 
@@ -241,18 +238,17 @@
             });
 
         });
-        function selectUser(elemento)
-        {
+        function selectUser(elemento) {
             $('#nome-perfil-right').remove();
             $('#imagem-perfil-right').remove();
             var nome = $(elemento).find('span').text();
-            var usuarioSelect = "<span id='nome-perfil-right' style='margin: -6px;margin-right: 10px;'>"+nome+"</span>"+
+            var usuarioSelect = "<span id='nome-perfil-right' style='margin: -6px;margin-right: 10px;'>" + nome + "</span>" +
                 "<img  id='imagem-perfil-right' style='height: 50px; margin-right: 23px;' src='/img/me.jpg' class='circle responsive-img' /> "
-            
-            $('.info-perfil-right').append(usuarioSelect);console.log("entrei"); 
-            
+
+            $('.info-perfil-right').append(usuarioSelect); console.log("entrei");
+
         }
-         
+
     </script>
 </body>
 
