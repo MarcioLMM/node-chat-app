@@ -32,7 +32,7 @@ socket.on('userList', function (users) {
                       "<img style='height: 50px;' src='img/me.jpg' class='circle responsive-img'>"+
                   "</div>"+
                   "<div class='col s8'>"+
-                    "<a onclick='selectUser(this);' href='/chat/${user.id}'>"+
+                    "<a onclick='selectUser(this);' href='/chat/"+user.id+"'>"+
                       "<span class='black-text'> "+ user.nome+"</span>"+
                     "</a>"+
                   "</div>"+

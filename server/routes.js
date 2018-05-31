@@ -71,6 +71,7 @@ router.get('/chat', (req, res) => {
                 //     htmlFinal.push(html);
                 // });
                 res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, mensagens: htmlFinal});
+                console.log('marcelo passeei :::');
             }).catch((error) => {
                 console.log('Deu ruim:', error);
             });
