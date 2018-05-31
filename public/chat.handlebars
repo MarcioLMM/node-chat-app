@@ -26,13 +26,13 @@
                         <div class="background">
                             <img src="img/office.jpg" />
                         </div>
-                        <img class="circle" src="img/me.jpg" />
-                        <a href="#name">
-                            <span class="nomeUsuarioLogado white-text name">{{nome}}</span>
-                        </a>
-                        <a href="#email">
+                        <div class="name">{{nome}}</div>
+                        <div>
+                            <span class="nomeUsuarioLogado white-text">{{nome}}</span>
+                        </div>
+                        <div>
                             <span class="white-text email">{{email}}</span>
-                        </a>
+                        </div>
                     </div>
                     <div style="position: absolute;top: 20px;right: 20px;">
                         <a href="/logout" class="logout" title="Logout">
@@ -185,6 +185,18 @@
 
     <script>
         $(document).ready(function () {
+
+         $('.name').nameBadge(
+        {
+            border: { width: 0 },
+            text: '#fff',
+            margin: 0,
+            size: 64
+        });
+        
+
+
+
             $('#modalAlterarNome').modal();
             $('#slide-out').sidenav();
             var elem = $('#slide-out2').sidenav();

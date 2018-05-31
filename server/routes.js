@@ -183,6 +183,7 @@ function pegaMensagens(id, idTo) {
                 console.log('Vou retornar as mensagens');
                 mensagens.forEach(mensagem => console.log(mensagem.dataValues));
                 resolve(mensagens);
+                console.log("joaodoriaorei");
             });
         }
         console.log('Estou aqui fora');
