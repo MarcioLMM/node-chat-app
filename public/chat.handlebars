@@ -124,10 +124,7 @@
                 <i class="material-icons">menu</i>
             </a>
             <div class="row right info-perfil-right">
-                <span style="margin: -6px;             margin-right: 10px;">
-                    {{nome}}
-                </span>
-                <img style="    height: 50px; margin-right: 23px;" src="/img/me.jpg" alt="" class="circle responsive-img" />
+                
             </div>
         </nav>
         <main class="main" style="padding-top: 70px;" id="mensagens">
@@ -230,7 +227,20 @@
                     }, 0);
                 }
             });
+
         });
+        function selectUser(elemento)
+        {
+            $('#nome-perfil-right').remove();
+            $('#imagem-perfil-right').remove();
+            var nome = $(elemento).find('span').text();
+            var usuarioSelect = "<span id='nome-perfil-right' style='margin: -6px;margin-right: 10px;'>"+nome+"</span>"+
+                "<img  id='imagem-perfil-right' style='height: 50px; margin-right: 23px;' src='/img/me.jpg' class='circle responsive-img' /> "
+            
+            $('.info-perfil-right').append(usuarioSelect);console.log("entrei"); 
+            
+        }
+         
     </script>
 </body>
 

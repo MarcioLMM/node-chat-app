@@ -24,22 +24,21 @@ socket.on('userList', function (users) {
   $(".lista-usuarios").remove();
   users.forEach(function (user) {
     if(user.id != userId) {
-      $("#usuariosLogados").append(`
-      <li class="lista-usuarios">
-        <div class="card">
-            <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                    <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                    <!-- notice the "circle" class -->
-                </div>
-                <div class="col s8">
-                <a href="/chat/${user.id}">
-                  <span class="black-text">${user.nome}</span>
-                </a>
-                </div>
-            </div>
-        </div>
-      </li>`);
+      $("#usuariosLogados").append(""+
+        "<li class='lista-usuarios'>"+
+          "<div class='card'>"+
+              "<div class='row valign-wrapper' style='margin-bottom: -10px;'>"+
+                  "<div class='col s4' style='display: flex;padding-top: 10px;padding-bottom: 10px;'>"+
+                      "<img style='height: 50px;' src='img/me.jpg' class='circle responsive-img'>"+
+                  "</div>"+
+                  "<div class='col s8'>"+
+                    "<a onclick='selectUser(this);' href='/chat/${user.id}'>"+
+                      "<span class='black-text'> "+ user.nome+"</span>"+
+                    "</a>"+
+                  "</div>"+
+              "</div>"+
+          "</div>"+
+        "</li>");
     }
   });
 });
