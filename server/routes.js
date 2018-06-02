@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const Sequelize = require('sequelize');
 const session = require('express-session');
-const sequelize = new Sequelize('mysql://chatuser:chatpassword@localhost/chat_teste');
+const sequelize = new Sequelize('mysql://sql10241036:xTxvVcqctW@sql10.freemysqlhosting.net:3306/sql10241036');
 const Op = Sequelize.Op;
 
 sequelize
@@ -53,25 +53,7 @@ router.get('/chat', (req, res) => {
             var id = req.session.userId;
             Mensagem.findAll({where: {idSender: {[Op.or]: [id, idTo]}, idTo: {[Op.or]: [id, idTo]}}}
             ).then(mensagens => {
-                var htmlFinal = [];
-                // mensagens.forEach(mensagem => {
-                //     var lado = id === mensagem.idSender ? 'right' : 'left';
-                //     var html = `
-                //     <div class="div-balao div-balao-${lado}">
-                //     <span class="quina-balao quina-${lado}"></span>
-                //     <div class="balao-msg balao-${lado}">
-                //         <p><b>${mensagem.id}</b></p>
-                //         <span>
-                //             ${mensagem.conteudo}
-                //         </span>
-                //         <span class="balao-hora">Data Qualquer</span>
-                //     </div>
-                //     </div>
-                //     </br>`
-                //     htmlFinal.push(html);
-                // });
-                res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, mensagens: htmlFinal});
-                console.log('marcelo passeei :::');
+                res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
             }).catch((error) => {
                 console.log('Deu ruim:', error);
             });
@@ -128,6 +110,7 @@ router.post('/login', (req, res) => {
             console.log(req.session);
             res.redirect('/chat');
         }).catch((error) => {
+            console.log(error);
             res.render('login', {msg: "Dados inválidos"});
         });
     }
@@ -183,7 +166,6 @@ function pegaMensagens(id, idTo) {
                 console.log('Vou retornar as mensagens');
                 mensagens.forEach(mensagem => console.log(mensagem.dataValues));
                 resolve(mensagens);
-                console.log("joaodoriaorei");
             });
         }
         console.log('Estou aqui fora');

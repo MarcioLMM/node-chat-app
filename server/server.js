@@ -6,11 +6,17 @@ const session = require('express-session');
 var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 var redis = require("redis");
-client = redis.createClient();
+client = redis.createClient(16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true});
+
+client.auth('abJprwykKTWGBDrtZHTMaeLCmsouFvnP', function (err) {
+  if (err) throw err;
+});
 var exphbs  = require('express-handlebars');
 
 client.flushall( function (err, succeeded) {
 });
+
+// abJprwykKTWGBDrtZHTMaeLCmsouFvnP
 
 const {generateMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
@@ -81,6 +87,7 @@ server.listen(port, () => {
 function updateUserList(usuario) {
   return new Promise((resolve, reject) => {
     client.get('users', (err, reply) => {
+      console.log('Users', reply);
       let users = JSON.parse(reply);
       users = users.filter(user => {return user.id != usuario.id}); 
       users.push(usuario);
