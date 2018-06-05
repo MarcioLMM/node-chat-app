@@ -141,6 +141,7 @@ router.get('/deletaUsuario/:id', (req, res) => {
     sess = req.session;
     id = req.params.id;
     deletaUsuario(id);
+    deletaMensagens(id);
     req.session.logado = false;
     req.session.userId = null;
     req.session.username = null;
@@ -152,6 +153,15 @@ function deletaUsuario(idDelete) {
     Usuario.destroy({where: {
         id:idDelete
     }}).then(() => {
+        console.log('deletei os caras');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+function deletaMensagens(idDelete) {
+    Mensagem.destroy({where: {$or: [{idSender:{$eq: idDelete}},{idTo:{$eq: idDelete}}]}
+    }).then(() => {
         console.log('deletei os caras');
     }).catch((error) => {
         console.log(error);
