@@ -137,6 +137,27 @@ router.post('/alterarNome', (req, res) => {
     });
 });
 
+router.get('/deletaUsuario/:id', (req, res) => {
+    sess = req.session;
+    id = req.params.id;
+    deletaUsuario(id);
+    req.session.logado = false;
+    req.session.userId = null;
+    req.session.username = null;
+    req.session.userEmail = null;
+    res.redirect('/login');
+});
+
+function deletaUsuario(idDelete) {
+    Usuario.destroy({where: {
+        id:idDelete
+    }}).then(() => {
+        console.log('deletei os caras');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 function usuarioValido(nome, password, email) {
     if(nome === '' || password === '' || email === '') {
         return false;
