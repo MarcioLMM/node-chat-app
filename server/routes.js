@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const Sequelize = require('sequelize');
 const session = require('express-session');
+// const sequelize = new Sequelize('mysql://chatuser:chatpassword@localhost:3306/chat_teste');
 const sequelize = new Sequelize('mysql://sql10241036:xTxvVcqctW@sql10.freemysqlhosting.net:3306/sql10241036');
 const Op = Sequelize.Op;
 
@@ -48,17 +49,18 @@ router.get('/login', (req, res) => {
 router.get('/chat', (req, res) => {
     sess = req.session;
     var idTo = req.session.idTo
+    var nomeDoCara = req.session.nomeDoCara
     if(typeof sess.logado !== 'undefined' && sess.logado === true) {
         if(idTo !== undefined) {
             var id = req.session.userId;
             Mensagem.findAll({where: {idSender: {[Op.or]: [id, idTo]}, idTo: {[Op.or]: [id, idTo]}}}
             ).then(mensagens => {
-                res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
+                res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, nomeDoCara: nomeDoCara});
             }).catch((error) => {
                 console.log('Deu ruim:', error);
             });
         } else {
-            res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo});
+            res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, nomeDoCara: nomeDoCara});
         }
         return;
     }
@@ -68,11 +70,17 @@ router.get('/chat', (req, res) => {
 router.get('/chat/:id', (req, res) => {
     sess = req.session;
     req.session.idTo = req.params.id;
-    if(typeof sess.logado !== 'undefined' && sess.logado === true) {
-        res.redirect('/chat');
-        return;
-    }
-    res.redirect('/login');
+    Usuario.findAll({where :{id: req.session.idTo}}).then((user) => {
+        req.session.nomeDoCara = user[0].nome;
+        if(typeof sess.logado !== 'undefined' && sess.logado === true) {
+            res.redirect('/chat');
+            return;
+        }
+        res.redirect('/login');
+    }).catch(() => {
+        console.log('deu merda');
+        res.redirect('/login');
+    });
 });
 
 router.post('/cadastrar', (req, res) => {
@@ -134,7 +142,7 @@ router.post('/alterarNome', (req, res) => {
     ).then(() => {
         res.status(201).json({msg: "Usuario alterado com sucesso"});
     }).catch(() => {
-        res.status(500).send({ error: 'nao alterado' });
+        res.status(500).json({ error: 'nao alterado' });
     });
 });
 
