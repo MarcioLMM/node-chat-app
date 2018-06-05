@@ -6,7 +6,7 @@ const session = require('express-session');
 var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 var redis = require("redis");
-client = redis.createClient(16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true});
+client = redis.createClient(16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true}));
 //16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true}
 client.auth('abJprwykKTWGBDrtZHTMaeLCmsouFvnP', function (err) {
   if (err) throw err;
@@ -87,7 +87,6 @@ server.listen(port, () => {
 function updateUserList(usuario) {
   return new Promise((resolve, reject) => {
     client.get('users', (err, reply) => {
-      console.log('Users', reply);
       let users = JSON.parse(reply);
       users = users.filter(user => {return user.id != usuario.id}); 
       users.push(usuario);
@@ -111,24 +110,13 @@ function removeUser(id) {
   return new Promise((resolve, reject) => {
     client.get('users', (err, reply) => {
       let users = JSON.parse(reply);
-      // console.log('vou remover o:', id);
       users = users.filter(user => {return user.socketId != id}); 
       client.set('users', JSON.stringify(users));
-      // console.log('remove users:', users);
       resolve(users);
     });
   });
 }
   
-  
-  // client.del(socket.handshake.query.userId, function(err, response) {
-    //   if (response == 1) {
-  //      console.log("Deleted Successfully!");
-  //   } else{
-  //    console.log("Cannot delete");
-  //   }
-  // });
-//// REDIS CONFIG ///
 client.on("error", function (err) {
   console.log("Error " + err);
 });

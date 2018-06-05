@@ -57,7 +57,6 @@ router.get('/chat', (req, res) => {
             ).then(mensagens => {
                 res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, nomeDoCara: nomeDoCara});
             }).catch((error) => {
-                console.log('Deu ruim:', error);
             });
         } else {
             res.render('chat', {id: req.session.userId, nome: req.session.username, email: req.session.userEmail, idTo: idTo, nomeDoCara: nomeDoCara});
@@ -78,7 +77,6 @@ router.get('/chat/:id', (req, res) => {
         }
         res.redirect('/login');
     }).catch(() => {
-        console.log('deu merda');
         res.redirect('/login');
     });
 });
@@ -103,7 +101,6 @@ router.post('/cadastrar', (req, res) => {
 router.post('/login', (req, res) => {
     var password = req.body.password;
     var email = req.body.email;
-    console.log("Password:", password, "Email", email);
     if(usuarioValido('teste', password, email)) {
         Usuario.findAll({where: {password: password, email: email}}
         ).then(user => {
@@ -115,10 +112,8 @@ router.post('/login', (req, res) => {
             req.session.userId = user[0].id;
             req.session.username = user[0].nome;
             req.session.userEmail = email;
-            console.log(req.session);
             res.redirect('/chat');
         }).catch((error) => {
-            console.log(error);
             res.render('login', {msg: "Dados inválidos"});
         });
     }
@@ -135,9 +130,6 @@ router.get('/logout', (req, res) => {
 router.post('/alterarNome', (req, res) => {
     var nomeRecebido = req.body.nome;
     req.session.username = nomeRecebido;
-    console.log(nomeRecebido);
-    console.log("cheguei");
-   
     Usuario.update({nome: nomeRecebido},{where: { email: req.session.userEmail }}
     ).then(() => {
         res.status(201).json({msg: "Usuario alterado com sucesso"});
@@ -162,18 +154,14 @@ function deletaUsuario(idDelete) {
     Usuario.destroy({where: {
         id:idDelete
     }}).then(() => {
-        console.log('deletei os caras');
     }).catch((error) => {
-        console.log(error);
     });
 }
 
 function deletaMensagens(idDelete) {
     Mensagem.destroy({where: {$or: [{idSender:{$eq: idDelete}},{idTo:{$eq: idDelete}}]}
     }).then(() => {
-        console.log('deletei os caras');
     }).catch((error) => {
-        console.log(error);
     });
 }
 
@@ -185,30 +173,22 @@ function usuarioValido(nome, password, email) {
 }
 
 function salvaMensagem(mensagem) {
-    console.log(mensagem);
     if(mensagem.idTo != "") {
         Mensagem.create({conteudo: mensagem.conteudo, idSender: mensagem.idSender, idTo: mensagem.idTo, nome: mensagem.nome}
         ).then(() => {
-            console.log('Sucesso');
         }).catch((err) => {
-            console.log('Deu merda:', err);
         });
     }
-    console.log('Não entrei');
 }
 
 function pegaMensagens(id, idTo) {
     return new Promise((resolve, reject) => {
-        console.log('idTo la dentro:', idTo, idTo !== undefined);
         if(idTo !== undefined) {
             Mensagem.findAll({where: {idSender: {[Op.or]: [id, idTo]}, idTo: {[Op.or]: [id, idTo]}}}
             ).then(mensagens => {
-                console.log('Vou retornar as mensagens');
-                mensagens.forEach(mensagem => console.log(mensagem.dataValues));
                 resolve(mensagens);
             });
         }
-        console.log('Estou aqui fora');
       });
 }
 

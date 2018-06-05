@@ -191,7 +191,6 @@
                 instance2.close();
             });
             $(".div-hover").click(function () {
-                console.log("passei");
                 $("#fiAlterar-imagem").click();
             });
             $(".container-msg").animate({ scrollTop: $('.container-msg').prop("scrollHeight") }, 0);
@@ -229,7 +228,7 @@
             var usuarioSelect = "<span id='nome-perfil-right' style='margin: -6px;margin-right: 10px;'>" + nome + "</span>" +
                 "<img  id='imagem-perfil-right' style='height: 50px; margin-right: 23px;' src='/img/me.jpg' class='circle responsive-img' /> "
 
-            $('.info-perfil-right').append(usuarioSelect); console.log("entrei");
+            $('.info-perfil-right').append(usuarioSelect); 
 
         }
 

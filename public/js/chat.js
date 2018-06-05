@@ -2,7 +2,6 @@ var userId = document.getElementById('userId').innerHTML;
 var username = document.getElementById('user_name').innerHTML;
 var idTo = document.getElementById('idTo').innerHTML;
 
-console.log("Vou logar no io:", userId, username);
 var socket = io({
   query: {
     userId: userId,
@@ -20,7 +19,6 @@ socket.on('disconnect', function () {
 });
 
 socket.on('userList', function (users) {
-  console.log('Chegou userList:', users);
   $(".lista-usuarios").remove();
   users.forEach(function (user) {
     if(user.id != userId) {
@@ -52,14 +50,11 @@ socket.on('userList', function (users) {
 });
 
 socket.on('newMessage', function (message) {
-  console.log('Chegou mensagem:', message);
   var mostra = message.idSender == idTo ? true : false;
   if (mostra || (message.idSender == userId && message.idTo == idTo)) {
     var lado = userId == message.idSender ? 'right' : 'left';
     var now = new Date();
     var now = now.getDate()+"/"+(now.getMonth() + 1)+"/"+now.getFullYear()+" "+now.get;
-
-    console.log("lado:", lado, "now:", now);
 
     var html = `
     <div class="div-balao div-balao-${lado}">
@@ -79,7 +74,6 @@ socket.on('newMessage', function (message) {
     $('#ctMenssagem').focus();
     $('#ctMenssagem').css('height', '22px');
   } else {
-    console.log("Não vou mostrar");
   }
 
 });
@@ -98,14 +92,12 @@ $("#btn-enviar").click(function () {
 
 function enviaFormAlterarNome() {
   var nome = document.getElementById('ctNome').value;
-  console.log(nome);
 
   if(nome !== ''){
 
     axios.post('/alterarNome', { nome: nome}
     ).then(function (response) {
       if (response.status === 201) {
-        console.log(response.data.msg);
         $(".nomeUsuarioLogado").text(nome);
         $(".namePrincipal").text(nome);
         $('#modalAlterarNome').modal("close");
@@ -124,8 +116,6 @@ function enviaFormAlterarNome() {
       }
     }).catch(function (error) {
     
-        console.log(error);
-      
     });
   }
   else
