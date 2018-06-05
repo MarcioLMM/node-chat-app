@@ -39,47 +39,16 @@
                             <i class="fas fa-sign-out-alt" style="height: 30px;width:30px;font-size: 30px;"></i>
                         </a>
                     </div>
+                    <div style="position: absolute;top: 50px;right: 10px;">
+                        <a href="#" data-target="slide-out3" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
+                            <i class="fas fa-cog" style="font-size: 2em" title="configurações"></i>
+                        </a>
+                    </div>
                 </li>
                 <li style="display: flex;">
 
                 </li>
                 <li style="display: flex;    justify-content: center;">
-                    <a href="#" data-target="slide-out2" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
-                        <i class="fas fa-users" style="font-size: 2em" title="contatos"></i>
-                    </a>
-                    <a href="#" data-target="slide-out3" class="sidenav-trigger waves-effect waves-teal" style="margin-left: 0px;padding: 0px;    background: unset;">
-                        <i class="fas fa-cog" style="font-size: 2em" title="configurações"></i>
-                    </a>
-                    <ul id="slide-out2" class="sidenav" style="color: #000;">
-                        <li>
-                            <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
-                                <a style="background: unset;padding: 0px;margin-right: 10px;position: absolute;z-index: 1; left: 15px; top: 15px;" id="btn-voltar"
-                                    title="Voltar">
-                                    <i style="padding: 0px; margin: 0px;font-size: 2em;height: 30px;color: rgba(0,0,0,0.54);" class="fas fa-arrow-left"></i>
-                                </a>
-                                <h4 style="    font-size: 20px; left: 23px;text-align: center;">
-                                    contatos
-                                </h4>
-                            </div>
-                            <ul class="container-lista-conversas">
-                                <li>
-                                    <div class="card">
-                                        <div class="row valign-wrapper" style="margin-bottom: -10px;">
-                                            <div class="col s4" style="display: flex;padding-top: 10px;padding-bottom: 10px;">
-                                                <img style="    height: 50px;" src="img/me.jpg" alt="" class="circle responsive-img">
-                                                <!-- notice the "circle" class -->
-                                            </div>
-                                            <div class="col s8">
-                                                <span class="black-text">
-                                                    Thiago
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                     <ul id="slide-out3" class="sidenav" style="color: #000;">
                         <li style="width: 100%; height: 100%;">
                             <div style="display: flex;flex-direction: column; height: 100%;width: 100%;">
@@ -215,11 +184,7 @@
             $('#modalExcluirConta').modal();
             $('#modalAlterarNome').modal();
             $('#slide-out').sidenav();
-            var elem = $('#slide-out2').sidenav();
-            var instance = M.Sidenav.getInstance(elem);
-            $("#btn-voltar").click(function () {
-                instance.close();
-            });
+            
             var elem2 = $('#slide-out3').sidenav();
             var instance2 = M.Sidenav.getInstance(elem2);
             $("#btn-voltar2").click(function () {
