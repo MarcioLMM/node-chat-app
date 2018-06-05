@@ -38,9 +38,6 @@
                         <a href="/logout" class="logout" title="Logout">
                             <i class="fas fa-sign-out-alt" style="height: 30px;width:30px;font-size: 30px;"></i>
                         </a>
-                        <a href="/deletaUsuario/{{id}}" class="logout" title="Logout">
-                            <i class="fas fa-sign-out-alt" style="height: 30px;width:30px;font-size: 30px;"></i>
-                        </a>
                     </div>
                 </li>
                 <li style="display: flex;">
@@ -104,13 +101,17 @@
                                         <div class="col s10">
                                             <span class="nomeUsuarioLogado" style="width: 100%;padding-left: 5px;">{{nome}}</span>
                                         </div>
-                                        <div class="col s3">
+                                        <div class="col s3" style="display: flex;justify-content: flex-end;">
                                             <a style="cursor: pointer;background: unset;padding-right: 10px;" class="modal-trigger" href="#modalAlterarNome">
                                                 <i style="height: 25px;color: rgba(0,0,0,0.54);" class="fas fa-pencil-alt" title="Editar"></i>
+                                            </a>
+                                            <a style="cursor: pointer;background: unset;padding-right: 10px;" class="modal-trigger" href="#modalExcluirConta">
+                                                <i style="height: 25px;color: rgba(0,0,0,0.54);" class="fas fa-trash-alt" title="Remover"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </li>
                     </ul>
@@ -164,6 +165,21 @@
             <button class="modal-action modal-close btn grey darken-1" type="button" style="float:left;">fechar</button>
         </div>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="modalExcluirConta" class="modal" style="width: 90%;max-width: 315px;    min-height: 200px;">
+        <div class="modal-header" style="padding: 10px 10px 0px 10px;text-align: center;">
+            <h4>Excluir conta!</h4>
+        </div>
+         <div class="modal-content" style="padding-top: 0px;">
+            <span>Tem certeza que deseja remover a conta?</span>
+        </div>
+        
+        <div class="modal-footer" style="padding-left: 24px;padding-right: 24px;">
+            <a href="/deletaUsuario/{{id}}" class="btn btn-login" title="remover">Sim</a>
+            <button class="modal-action modal-close btn grey darken-1" type="button" style="float:left;">Não</button>
+        </div>
+    </div>
     <p id="userId" style="display: none">{{id}}</p>
     <p id="user_name" style="display: none">{{nome}}</p>
     <p id="idTo" style="display: none">{{idTo}}</p>
@@ -196,7 +212,7 @@
 
 
 
-
+            $('#modalExcluirConta').modal();
             $('#modalAlterarNome').modal();
             $('#slide-out').sidenav();
             var elem = $('#slide-out2').sidenav();
