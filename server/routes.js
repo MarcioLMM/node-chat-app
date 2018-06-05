@@ -126,6 +126,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/alterarNome', (req, res) => {
     var nomeRecebido = req.body.nome;
+    req.session.username = nomeRecebido;
     console.log(nomeRecebido);
     console.log("cheguei");
    
