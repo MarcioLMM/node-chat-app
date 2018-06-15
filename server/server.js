@@ -6,7 +6,7 @@ const session = require('express-session');
 var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 var redis = require("redis");
-client = redis.createClient(16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true}));
+client = redis.createClient(16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true});
 //16986, 'redis-16986.c17.us-east-1-4.ec2.cloud.redislabs.com', {no_ready_check: true}
 client.auth('abJprwykKTWGBDrtZHTMaeLCmsouFvnP', function (err) {
   if (err) throw err;
