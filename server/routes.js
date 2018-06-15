@@ -150,6 +150,14 @@ router.get('/deletaUsuario/:id', (req, res) => {
     res.redirect('/login');
 });
 
+router.get('*', function(req, res){
+    req.session.logado = false;
+    req.session.userId = null;
+    req.session.username = null;
+    req.session.userEmail = null;
+    res.redirect('/login');
+});
+
 function deletaUsuario(idDelete) {
     Usuario.destroy({where: {
         id:idDelete
