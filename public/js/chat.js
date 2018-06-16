@@ -54,7 +54,7 @@ socket.on('newMessage', function (message) {
   if (mostra || (message.idSender == userId && message.idTo == idTo)) {
     var lado = userId == message.idSender ? 'right' : 'left';
     var now = new Date();
-    var now = now.getDate()+"/"+(now.getMonth() + 1)+"/"+now.getFullYear()+" "+now.get;
+    var now = now.getDate()+"/"+(now.getMonth() + 1)+"/"+now.getFullYear();
 
     var html = `
     <div class="div-balao div-balao-${lado}">
